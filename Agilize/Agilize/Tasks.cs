@@ -52,6 +52,11 @@ namespace Agilize
         }
 
     }
+    /// <summary>
+    /// 
+    /// 
+    /// </summary>
+
     public enum TaskState
     {
         BackLog,

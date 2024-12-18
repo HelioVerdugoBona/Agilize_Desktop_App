@@ -223,5 +223,10 @@ namespace Agilize
             pathToProjectFiles = newfolderPathTxtBox;
         }
 
+        private void logOutBtn_Click(object sender, EventArgs e)
+        {
+            login.Show();
+            this.Close();
+        }
     }
 }

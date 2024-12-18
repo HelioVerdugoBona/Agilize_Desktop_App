@@ -401,5 +401,11 @@ namespace Agilize
                 task.ShowDialog();
             }
         }
+
+        private void logOutBtn_Click(object sender, EventArgs e)
+        {
+            login.Show();
+            this.Close();
+        }
     }
 }

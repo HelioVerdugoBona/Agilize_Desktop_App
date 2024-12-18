@@ -422,5 +422,11 @@ namespace Agilize
                    !string.IsNullOrWhiteSpace(user.nickname) &&
                    !string.IsNullOrWhiteSpace(user.password);
         }
+
+        private void logOutBtn_Click(object sender, EventArgs e)
+        {
+            login.Show();
+            this.Close();
+        }
     }
 }

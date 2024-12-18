@@ -53,6 +53,7 @@
             this.saveBTN = new System.Windows.Forms.Button();
             this.confirmPswrdTxtBox = new System.Windows.Forms.TextBox();
             this.confirmPswrdLbl = new System.Windows.Forms.Button();
+            this.logOutBtn = new System.Windows.Forms.Button();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.separatorLine2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.acountIMG)).BeginInit();
@@ -68,6 +69,7 @@
             // 
             this.Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(197)))), ((int)(((byte)(159)))));
             this.Menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Menu.Controls.Add(this.logOutBtn);
             this.Menu.Controls.Add(this.acountLBL);
             this.Menu.Controls.Add(this.projectFoldersLBL);
             this.Menu.Controls.Add(this.newProjectLBL);
@@ -379,6 +381,22 @@
             this.confirmPswrdLbl.Text = "Confirm Password";
             this.confirmPswrdLbl.UseVisualStyleBackColor = false;
             // 
+            // logOutBtn
+            // 
+            this.logOutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(101)))), ((int)(((byte)(158)))));
+            this.logOutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logOutBtn.FlatAppearance.BorderSize = 0;
+            this.logOutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logOutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logOutBtn.ForeColor = System.Drawing.Color.White;
+            this.logOutBtn.Location = new System.Drawing.Point(16, 703);
+            this.logOutBtn.Name = "logOutBtn";
+            this.logOutBtn.Size = new System.Drawing.Size(271, 46);
+            this.logOutBtn.TabIndex = 23;
+            this.logOutBtn.Text = "Log Out";
+            this.logOutBtn.UseVisualStyleBackColor = false;
+            this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
+            // 
             // Acount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,5 +459,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox confirmPswrdTxtBox;
         private System.Windows.Forms.Button confirmPswrdLbl;
+        private System.Windows.Forms.Button logOutBtn;
     }
 }
