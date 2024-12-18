@@ -164,7 +164,9 @@
             this.ClientSize = new System.Drawing.Size(1264, 761);
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.pictureBox1);
+            this.MaximizeBox = false;
             this.Name = "Login";
+            this.ShowIcon = false;
             this.Text = "Login";
             this.LoginBox.ResumeLayout(false);
             this.LoginBox.PerformLayout();

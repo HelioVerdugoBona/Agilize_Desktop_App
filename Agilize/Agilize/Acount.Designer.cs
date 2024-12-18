@@ -385,6 +385,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(1094, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.confirmPswrdLbl);
             this.Controls.Add(this.confirmPswrdTxtBox);
             this.Controls.Add(this.saveBTN);
@@ -396,6 +397,7 @@
             this.Controls.Add(this.Menu);
             this.Controls.Add(this.mailTxtBox);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.MaximizeBox = false;
             this.Name = "Acount";
             this.Text = "Acount";
             this.Menu.ResumeLayout(false);

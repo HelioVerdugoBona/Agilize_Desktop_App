@@ -9,17 +9,18 @@ namespace Agilize
 
         Users user;
         String pathToProjectFiles;
-
+        Login login;
 
         /// <summary>
         /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión.
         /// </summary>
-        public MainHub(Users user, String pathToProjectFiles)
+        public MainHub(Users user, String pathToProjectFiles, Login login)
         {
             InitializeComponent();
             this.user = new Users();
             this.user = user;
             this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
             SetAll();
             
         }
@@ -82,7 +83,7 @@ namespace Agilize
                 {
                     if (projectName.Equals(existentProject))
                     {
-                        ProjectWindow project = new ProjectWindow(user, pathToProjectFiles, existentProject, false);
+                        ProjectWindow project = new ProjectWindow(user, pathToProjectFiles, existentProject, false, login);
                         project.Show();
                         this.Close();
                     }
@@ -95,7 +96,7 @@ namespace Agilize
         /// </summary>
         private void homeLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles);
+            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
             mainHub.Show();
             this.Close();
         }
@@ -105,7 +106,7 @@ namespace Agilize
         /// </summary>
         private void homeIMG_Click(object sender, EventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles);
+            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
             mainHub.Show();
             this.Close();
         }
@@ -115,9 +116,8 @@ namespace Agilize
         /// </summary>
         private void newProjectLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles);
-            newProject.Show();
-            this.Close();
+            NewProject newProject = new NewProject(user, pathToProjectFiles,this, login);
+            newProject.ShowDialog();
         }
 
         /// <summary>
@@ -125,9 +125,8 @@ namespace Agilize
         /// </summary>
         private void newProjectIMG_Click(object sender, EventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles);
-            newProject.Show();
-            this.Close();
+            NewProject newProject = new NewProject(user, pathToProjectFiles,this, login);
+            newProject.ShowDialog();
         }
 
         /// <summary>
@@ -135,7 +134,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles);
+            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
             projectFolders.Show();
             this.Close();
         }
@@ -145,7 +144,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersIMG_Click(object sender, EventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles);
+            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
             projectFolders.Show();
             this.Close();
         }
@@ -155,7 +154,7 @@ namespace Agilize
         /// </summary>
         private void acountLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles);
+            Acount acount = new Acount(user, pathToProjectFiles, login);
             acount.Show();
             this.Close();
         }
@@ -165,7 +164,7 @@ namespace Agilize
         /// </summary>
         private void acountIMG_Click(object sender, EventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles);
+            Acount acount = new Acount(user, pathToProjectFiles, login);
             acount.Show();
             this.Close();
         }
@@ -175,6 +174,7 @@ namespace Agilize
         /// </summary>
         private void logOutBtn_Click(object sender, EventArgs e)
         {
+            login.Show();
             this.Close();
         }
     }

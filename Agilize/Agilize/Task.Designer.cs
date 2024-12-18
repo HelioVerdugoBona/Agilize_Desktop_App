@@ -297,6 +297,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(834, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.deleteMemberBtn);
             this.Controls.Add(this.sprintNumUpDown);
             this.Controls.Add(this.currentSateCBox);
@@ -316,7 +317,9 @@
             this.Controls.Add(this.descriptionTxtBox);
             this.Controls.Add(this.descriptionLbl);
             this.Controls.Add(this.TaskLBL);
+            this.MaximizeBox = false;
             this.Name = "Task";
+            this.ShowIcon = false;
             this.Text = "Task";
             ((System.ComponentModel.ISupportInitialize)(this.sprintNumUpDown)).EndInit();
             this.ResumeLayout(false);

@@ -256,12 +256,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(1184, 511);
+            this.ControlBox = false;
             this.Controls.Add(this.retunBTN);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.manageMembersLbl);
             this.Controls.Add(this.createMembersBox);
+            this.MaximizeBox = false;
             this.Name = "ManageMembers";
+            this.ShowIcon = false;
             this.Text = "ManageMembers";
             this.createMembersBox.ResumeLayout(false);
             this.createMembersBox.PerformLayout();

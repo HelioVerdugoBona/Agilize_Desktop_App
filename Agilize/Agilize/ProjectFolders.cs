@@ -20,25 +20,26 @@ namespace Agilize
         String pathToProjectFiles;
         String newfolderPathTxtBox;
         Users user;
-
+        Login login;
         /// <summary>
         /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión.
         /// </summary>
-        public ProjectFolders(Users user,String pathToProjectFiles)
+        public ProjectFolders(Users user,String pathToProjectFiles, Login login)
         {
             InitializeComponent();
             SetAllLbls();
-            getAll(user, pathToProjectFiles);
+            getAll(user, pathToProjectFiles, login);
             RedondearBoton(saveBTN);
         }
 
         /// <summary>
         /// Settea todo el apartado visual del form
         /// </summary>
-        private void getAll(Users user, String pathToProjectFiles)
+        private void getAll(Users user, String pathToProjectFiles, Login login)
         {
             this.user = user;
             this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
             if (pathToProjectFiles != null)
             {
                 folderPathTxtBox.Text = pathToProjectFiles;
@@ -139,7 +140,7 @@ namespace Agilize
         /// </summary>
         private void homeLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles);
+            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
             mainHub.Show();
             this.Close();
         }
@@ -149,7 +150,7 @@ namespace Agilize
         /// </summary>
         private void homeIMG_Click(object sender, EventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles);
+            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
             mainHub.Show();
             this.Close();
         }
@@ -159,7 +160,7 @@ namespace Agilize
         /// </summary>
         private void newProjectLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles);
+            NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
             newProject.Show();
             this.Close();
         }
@@ -169,7 +170,7 @@ namespace Agilize
         /// </summary>
         private void newProjectIMG_Click(object sender, EventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles);
+            NewProject newProject = new NewProject(user, pathToProjectFiles,this, login);
             newProject.Show();
             this.Close();
         }
@@ -179,7 +180,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles);
+            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
             projectFolders.Show();
             this.Close();
         }
@@ -189,7 +190,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersIMG_Click(object sender, EventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles);
+            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
             projectFolders.Show();
             this.Close();
         }
@@ -199,7 +200,7 @@ namespace Agilize
         /// </summary>
         private void acountLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles);
+            Acount acount = new Acount(user, pathToProjectFiles, login);
             acount.Show();
             this.Close();
         }
@@ -209,7 +210,7 @@ namespace Agilize
         /// </summary>
         private void acountIMG_Click(object sender, EventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles);
+            Acount acount = new Acount(user, pathToProjectFiles, login);
             acount.Show();
             this.Close();
         }

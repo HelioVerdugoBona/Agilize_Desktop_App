@@ -21,12 +21,12 @@ namespace Agilize
         Projects projects;
         String pathToProjectFiles;
         List<Users> totalUsers;
-
+        Login login;
         /// <summary>
         /// Contructor del form, recibe el path donde estan los archivos del programa, el usuario que ha iniciado sessión.
         /// y el proyecto en el que estamos.
         /// </summary>
-        public ManageMembers(Users user, String pathToProjectFiles,Projects projects)
+        public ManageMembers(Users user, String pathToProjectFiles,Projects projects, Login login)
         {
             InitializeComponent();
             if (projects.arrayProjectUsers != null)
@@ -38,6 +38,7 @@ namespace Agilize
             this.projects = projects;
             this.user = user;
             this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
             setAll();
 
         }
@@ -129,25 +130,32 @@ namespace Agilize
                     email = newUser.email,
                     password = EncryptPassword(newUser.password)
                 };
-
-                projectMembers.Items.Add(userToAdd);
-
-                if (projects.arrayProjectUsers != null)
+                if (!comproveUserExists(userToAdd.nickname))
                 {
-                    projects.arrayProjectUsers.Add(userToAdd);
+                    projectMembers.Items.Add(userToAdd);
+
+                    if (projects.arrayProjectUsers != null)
+                    {
+                        projects.arrayProjectUsers.Add(userToAdd);
+                    }
+                    else
+                    {
+                        projects.arrayProjectUsers = new BindingList<Users> { userToAdd };
+                    }
+                    newUser.email = null;
+                    newUser.nickname = null;
+                    newUser.password = null;
+
+                    mailTxtBox.Text = "Email";
+                    NicknameTxtBox.Text = "Nickname";
+                    PaswordTxtBox.Text = "Password";
                 }
                 else
                 {
-                    projects.arrayProjectUsers = new BindingList<Users> { userToAdd };
-                }
-
-                newUser.email = null;
-                newUser.nickname = null;
-                newUser.password = null;
-
-                mailTxtBox.Text = "Email";
-                NicknameTxtBox.Text = "Nickname";
-                PaswordTxtBox.Text = "Password";
+                    newUser.nickname = null;
+                    NicknameTxtBox.Text = "Nickname";
+                    MessageBox.Show("Error, No puedes poner el nickname de un usuario que ya existe", "Creating Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }  
             }
             else
             {
@@ -167,11 +175,35 @@ namespace Agilize
                 projectMembers.Items.Add(addedUsers);
                 projects.arrayProjectUsers.Add(addedUsers);
                 membersofAgilize.Items.Remove(addedUsers);
+                
             }
             else
             {
                 MessageBox.Show("Error, no se ha selecciconado miembro a añadir", "Selecting Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             }
+        }
+
+        private bool comproveUserExists(String nickname)
+        {
+            if (!File.Exists(pathToProjectFiles + "\\Users.json"))
+            {
+                File.Create(pathToProjectFiles + "\\Users.json").Close(); // Crea y cierra el archivo
+            }
+            List<Users> usersList = new List<Users>();
+            string jsonContent = File.ReadAllText(pathToProjectFiles + "\\Users.json");
+            if (!string.IsNullOrWhiteSpace(jsonContent))
+            {
+                usersList = System.Text.Json.JsonSerializer.Deserialize<List<Users>>(jsonContent);
+            }
+            foreach (Users user in usersList)
+            {
+                if (user.nickname.Equals(nickname))
+                {
+                    return true;
+                }
+            }
+            return false;
+
         }
 
         /// <summary>
@@ -319,19 +351,22 @@ namespace Agilize
                         }
                     }
                 }
-                foreach (Users user in projects.arrayProjectUsers)
+                if (projects.arrayProjectUsers != null)
                 {
-                    if (!usersList.Contains(user) || !user.projectsList.Contains(projects.projectName))
+                    foreach (Users user in projects.arrayProjectUsers)
                     {
-                        if (user.projectsList == null)
+                        if (!usersList.Contains(user) || !user.projectsList.Contains(projects.projectName))
                         {
-                            user.projectsList = new BindingList<string>() { projects.projectName };
-                        }
-                        else
-                        {
-                            usersList.Remove(user);
-                            user.projectsList.Add(projects.projectName);
-                            usersList.Add(user);
+                            if (user.projectsList == null)
+                            {
+                                user.projectsList = new BindingList<string>() { projects.projectName };
+                            }
+                            else
+                            {
+                                usersList.Remove(user);
+                                user.projectsList.Add(projects.projectName);
+                                usersList.Add(user);
+                            }
                         }
                     }
                 }
@@ -347,12 +382,16 @@ namespace Agilize
         private BindingList<Users> obtainDeletedUsers()
         {
             BindingList <Users> deledUsers = new BindingList<Users>();
-            foreach (var user in totalUsers)
+            if (totalUsers != null)
             {
-                if (!projects.arrayProjectUsers.Contains(user))
+                foreach (var user in totalUsers)
                 {
-                    deledUsers.Add(user);
+                    if (!projects.arrayProjectUsers.Contains(user))
+                    {
+                        deledUsers.Add(user);
+                    }
                 }
+                return deledUsers;
             }
             return deledUsers;
         }
