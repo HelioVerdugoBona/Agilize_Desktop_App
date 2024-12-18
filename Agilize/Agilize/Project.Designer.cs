@@ -394,6 +394,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(1484, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.DoneLBox);
             this.Controls.Add(this.BackLogLBox);
             this.Controls.Add(this.saveBTN);
@@ -407,7 +408,9 @@
             this.Controls.Add(this.PendingConfirmationLBox);
             this.Controls.Add(this.DoingLBox);
             this.Controls.Add(this.ToDoLBox);
+            this.MaximizeBox = false;
             this.Name = "ProjectWindow";
+            this.ShowIcon = false;
             this.Text = "Projects";
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();

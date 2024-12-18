@@ -17,13 +17,14 @@ namespace Agilize
     {
         Users user;
         String pathToProjectFiles;
-        String thisProjectFolder;
+        String projectsJson = "\\Projects.json";
+        String usersJson = "\\Users.json";
         Projects projects;
-
+        Login login;
         /// <summary>
         /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión.
         /// </summary>
-        public ProjectWindow(Users user, String pathToProjectFiles, String projectName,Boolean newProject)
+        public ProjectWindow(Users user, String pathToProjectFiles, String projectName,Boolean newProject, Login login)
         {
             InitializeComponent();
             this.projects = new Projects();
@@ -31,8 +32,8 @@ namespace Agilize
             this.user = user;
             this.projects.projectName = projectName;
             this.projects.projectOwner = user.nickname;
-            thisProjectFolder = pathToProjectFiles + "\\" + projectName;
             this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
             if (newProject){ IsNewProject(); }
             else {  IsNotNewProject(); }
 
@@ -118,7 +119,6 @@ namespace Agilize
                 projects.arrayProjectUsers.Add(user);
             }
             ChangeJSONProperties();
-            Directory.CreateDirectory(thisProjectFolder);
         }
 
         /// <summary>
@@ -126,16 +126,23 @@ namespace Agilize
         /// </summary>
         private void IsNotNewProject()
         {
-
-            if (!File.Exists(thisProjectFolder + "\\" + this.projects.projectName + ".json"))
+            if (!File.Exists(pathToProjectFiles + projectsJson))
             {
-                File.Create(thisProjectFolder + "\\" + this.projects.projectName + ".json").Close(); // Crea y cierra el archivo
+                File.Create(pathToProjectFiles + projectsJson).Close(); // Crea y cierra el archivo
             }
-            else { 
-                string jsonContent = File.ReadAllText(thisProjectFolder + "\\" + this.projects.projectName + ".json");
+            else {
+                List<Projects> projectLists = new List<Projects>();
+                string jsonContent = File.ReadAllText(pathToProjectFiles + projectsJson);
                 if (!string.IsNullOrWhiteSpace(jsonContent))
                 {
-                    projects = System.Text.Json.JsonSerializer.Deserialize<Projects>(jsonContent);
+                    projectLists = System.Text.Json.JsonSerializer.Deserialize< List<Projects>>(jsonContent);
+                }
+                foreach (Projects project in projectLists)
+                {
+                    if (project.projectName.Equals(projects.projectName))
+                    {
+                        projects = project;
+                    }
                 }
             }
         }
@@ -146,7 +153,7 @@ namespace Agilize
         private void ChangeJSONProperties()
         {
             List<Users> usersList = new List<Users>();
-            string jsonContent = File.ReadAllText(pathToProjectFiles + "\\Users.json");
+            string jsonContent = File.ReadAllText(pathToProjectFiles + usersJson);
             if (!string.IsNullOrWhiteSpace(jsonContent))
             {
                 usersList = System.Text.Json.JsonSerializer.Deserialize<List<Users>>(jsonContent);
@@ -161,7 +168,7 @@ namespace Agilize
             }
 
             string newJsonContent = System.Text.Json.JsonSerializer.Serialize(usersList, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(pathToProjectFiles + "\\Users.json", newJsonContent);
+            File.WriteAllText(pathToProjectFiles + usersJson, newJsonContent);
         }
 
         /// <summary>
@@ -183,7 +190,7 @@ namespace Agilize
         /// </summary>
         private void homeLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles);
+            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
             mainHub.Show();
             this.Close();
         }
@@ -193,7 +200,7 @@ namespace Agilize
         /// </summary>
         private void homeIMG_Click(object sender, EventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles);
+            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
             mainHub.Show();
             this.Close();
         }
@@ -203,7 +210,7 @@ namespace Agilize
         /// </summary>
         private void manageMembersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles,projects);
+            ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles,projects, login);
             manageMembers.ShowDialog();
         }
 
@@ -212,7 +219,7 @@ namespace Agilize
         /// </summary>
         private void manageMembersIMG_Click(object sender, EventArgs e)
         {
-            ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles, projects);
+            ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles, projects, login);
             manageMembers.ShowDialog();
         }
 
@@ -221,7 +228,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles);
+            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
             projectFolders.Show();
             this.Close();
         }
@@ -231,7 +238,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersIMG_Click(object sender, EventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles);
+            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
             projectFolders.Show();
             this.Close();
         }
@@ -241,7 +248,7 @@ namespace Agilize
         /// </summary>
         private void acountLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles);
+            Acount acount = new Acount(user, pathToProjectFiles, login);
             acount.Show();
             this.Close();
         }
@@ -251,7 +258,7 @@ namespace Agilize
         /// </summary>
         private void acountIMG_Click(object sender, EventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles);
+            Acount acount = new Acount(user, pathToProjectFiles, login);
             acount.Show();
             this.Close();
         }
@@ -261,7 +268,7 @@ namespace Agilize
         /// </summary>
         private void backLogLBL_Click(object sender, EventArgs e)
         {
-            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.BackLog, projects.arrayProjectUsers);
+            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.BackLog, projects.arrayProjectUsers, login);
             newtask.ShowDialog();
         }
 
@@ -270,7 +277,7 @@ namespace Agilize
         /// </summary>
         private void toDoLBL_Click(object sender, EventArgs e)
         {
-            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.ToDo, projects.arrayProjectUsers);
+            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.ToDo, projects.arrayProjectUsers, login);
             newtask.ShowDialog();
         }
 
@@ -279,7 +286,7 @@ namespace Agilize
         /// </summary>
         private void doingLBL_Click(object sender, EventArgs e)
         {
-            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.Doing, projects.arrayProjectUsers);
+            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.Doing, projects.arrayProjectUsers, login);
             newtask.ShowDialog();
         }
 
@@ -288,7 +295,7 @@ namespace Agilize
         /// </summary>
         private void pendingConfirmationLBL_Click(object sender, EventArgs e)
         {
-            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.Pending_Confirmation, projects.arrayProjectUsers);
+            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.Pending_Confirmation, projects.arrayProjectUsers, login);
             newtask.ShowDialog();
         }
 
@@ -297,7 +304,7 @@ namespace Agilize
         /// </summary>
         private void doneLBL_Click(object sender, EventArgs e)
         {
-            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.Done, projects.arrayProjectUsers);
+            NewTask newtask = new NewTask(this, projects.arrayTasks, user, TaskState.Done, projects.arrayProjectUsers, login);
             newtask.ShowDialog();
         }
 
@@ -306,14 +313,30 @@ namespace Agilize
         /// </summary>
         private void saveBTN_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(thisProjectFolder + "\\" + this.projects.projectName + ".json"))
+            if (!File.Exists(pathToProjectFiles + projectsJson))
             {
-                File.Create(thisProjectFolder + "\\" + this.projects.projectName + ".json").Close(); // Crea y cierra el archivo
+                File.Create(pathToProjectFiles + projectsJson).Close(); // Crea y cierra el archivo
             }
-   
-            string newJsonContent = System.Text.Json.JsonSerializer.Serialize(projects, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(thisProjectFolder + "\\" + this.projects.projectName + ".json", newJsonContent);
 
+            List<Projects> projectLists = new List<Projects>();
+            string jsonContent = File.ReadAllText(pathToProjectFiles + projectsJson);
+            if (!string.IsNullOrWhiteSpace(jsonContent))
+            {
+                projectLists = System.Text.Json.JsonSerializer.Deserialize<List<Projects>>(jsonContent);
+            }
+            foreach (Projects project in projectLists)
+            {
+                if (project.projectName.Equals(projects.projectName))
+                {
+                    projectLists.Remove(project);
+                    projectLists.Add(projects);
+                    break;
+                }
+            }
+            projectLists.Add(projects);
+
+            string newJsonContent = System.Text.Json.JsonSerializer.Serialize(projectLists, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(pathToProjectFiles + projectsJson, newJsonContent);
             MessageBox.Show("Proyecto guardado con exito.", "Guardado éxitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -374,7 +397,7 @@ namespace Agilize
             Tasks selectedTask = (Tasks)selectedListBox.SelectedItem;
             if (selectedTask != null)
             {
-                Task task = new Task(this, projects.arrayTasks, selectedTask, user,projects.arrayProjectUsers);
+                Task task = new Task(this, projects.arrayTasks, selectedTask, user,projects.arrayProjectUsers, login);
                 task.ShowDialog();
             }
         }

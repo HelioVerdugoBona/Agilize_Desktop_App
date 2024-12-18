@@ -308,5 +308,9 @@ namespace Agilize
             return Convert.ToBase64String(outputBytes);
         }
 
+        private void SignUp_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -326,9 +326,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(1264, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.projectsBox);
             this.Controls.Add(this.Menu);
+            this.MaximizeBox = false;
             this.Name = "MainHub";
+            this.ShowIcon = false;
             this.Text = "MainHub";
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();

@@ -19,13 +19,14 @@ namespace Agilize
         Users user;
         Tasks task;
         Tasks oldTask;
+        Login login;
         Boolean isnewTask;
 
         /// <summary>
         /// Contructor del form, recibe el projecto que lo ha habierto, la lista de tareas, la tarea seleccionada,
         /// el usuario que ha iniciado sessión y los miembros del proyecto
         /// </summary>
-        public Task(ProjectWindow projectWindow, BindingList<Tasks> tasksList,Tasks task, Users user, BindingList<Users> projectMembers)
+        public Task(ProjectWindow projectWindow, BindingList<Tasks> tasksList,Tasks task, Users user, BindingList<Users> projectMembers, Login login)
         {
             InitializeComponent();
             this.task = new Tasks();
@@ -44,7 +45,7 @@ namespace Agilize
         /// Contructor del form, recibe el projecto que lo ha habierto, la lista de tareas, la tarea seleccionada,
         /// el usuario que ha iniciado sessión, el estado donde ha sido creado (Backlog, To Do, etc) y los miembros del proyecto.
         /// </summary>
-        public Task(ProjectWindow projectWindow, BindingList<Tasks> tasksList, Users user,String taskName,TaskState state, BindingList<Users> projectMembers)
+        public Task(ProjectWindow projectWindow, BindingList<Tasks> tasksList, Users user,String taskName,TaskState state, BindingList<Users> projectMembers, Login login)
         {
             InitializeComponent();
             task = new Tasks();
@@ -53,6 +54,7 @@ namespace Agilize
             this.projectMembers = new BindingList<Users>();
             this.projectMembers = projectMembers;
             this.user = user;
+            this.login = login;
             isnewTask = true;
             task.CurrentState = state;
             task.TaskName = taskName;

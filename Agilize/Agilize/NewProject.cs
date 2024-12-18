@@ -17,17 +17,48 @@ namespace Agilize
         Projects projects;
         Users user;
         String pathToProjectFiles;
-
+        MainHub mainHub;
+        ProjectFolders folderFolders;
+        Acount acount;
+        Login login;
         /// <summary>
-        /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión.
+        /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión,
+        /// además del Form que lo llama.
         /// </summary>
-        public NewProject(Users user, String pathToProjectFiles)
+        public NewProject(Users user, String pathToProjectFiles, MainHub mainHub, Login login)
         {
             InitializeComponent();
             projects = new Projects();
             this.user = new Users();
             this.user = user;
+            this.mainHub = mainHub;
             this.pathToProjectFiles = pathToProjectFiles;
+            RedondearBoton(acceptBtn);
+            RedondearBoton(cancelBtn);
+        }
+
+        public NewProject(Users user, String pathToProjectFiles, ProjectFolders folderFolders, Login login)
+        {
+            InitializeComponent();
+            projects = new Projects();
+            this.user = new Users();
+            this.user = user;
+            this.folderFolders = folderFolders;
+            this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
+            RedondearBoton(acceptBtn);
+            RedondearBoton(cancelBtn);
+        }
+
+        public NewProject(Users user, String pathToProjectFiles, Acount acount, Login login)
+        {
+            InitializeComponent();
+            projects = new Projects();
+            this.user = new Users();
+            this.user = user;
+            this.acount = acount;
+            this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
             RedondearBoton(acceptBtn);
             RedondearBoton(cancelBtn);
         }
@@ -101,7 +132,8 @@ namespace Agilize
                     {
                         user.projectsList.Add(projects.projectName);
                     }
-                    ProjectWindow project = new ProjectWindow(user, pathToProjectFiles, projects.projectName, true);
+                    mainHub.Close();
+                    ProjectWindow project = new ProjectWindow(user, pathToProjectFiles, projects.projectName, true, login);
                     project.Show();
                     this.Close();
                 }
@@ -130,7 +162,7 @@ namespace Agilize
             {
                 if (!File.Exists(pathToProjectFiles + "\\Projects.json"))
                 {
-                    File.Create(pathToProjectFiles).Close(); // Crea y cierra el archivo
+                    File.Create(pathToProjectFiles + "\\Projects.json").Close(); // Crea y cierra el archivo
                 }
                 // Leer usuarios existentes del archivo JSON
                 List<Projects> proyectList = new List<Projects>();

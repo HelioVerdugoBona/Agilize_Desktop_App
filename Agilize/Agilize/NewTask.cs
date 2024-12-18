@@ -18,12 +18,12 @@ namespace Agilize
         Users user;
         String newTaskName;
         TaskState state;
-
+        Login login;
         /// <summary>
         /// Contructor del form, recibe el projecto que lo ha habierto, la lista de tareas, el usuario que ha iniciado sessión,
         /// el estado donde ha sido creado (Backlog, To Do, etc) y los miembros del proyecto.
         /// </summary>
-        public NewTask(ProjectWindow projectWindow, BindingList<Tasks> tasksList, Users user, TaskState state, BindingList<Users> projectsUsers)
+        public NewTask(ProjectWindow projectWindow, BindingList<Tasks> tasksList, Users user, TaskState state, BindingList<Users> projectsUsers, Login login)
         {
             InitializeComponent();
             this.tasksList = new BindingList<Tasks>();
@@ -33,6 +33,7 @@ namespace Agilize
             this.user = user;
             this.state = state;
             this.projectsUsers = projectsUsers;
+            this.login = login;
             RedondearBoton(acceptBtn);
             RedondearBoton(cancelBtn);
         }
@@ -69,30 +70,37 @@ namespace Agilize
         {
             if (!string.IsNullOrWhiteSpace(newTaskName))
             {
-                bool dontExists = true;
-
-                foreach (Tasks task in tasksList)
+                if (tasksList != null)
                 {
-                    if (newTaskName.Equals(task.TaskName))
+                    bool dontExists = true;
+                    foreach (Tasks task in tasksList)
                     {
-                        dontExists = false;
+                        if (newTaskName.Equals(task.TaskName))
+                        {
+                            dontExists = false;
+                        }
+                    }
+                    if (dontExists)
+                    {
+                        Task task = new Task(projectWindow, tasksList, user, newTaskName, state, projectsUsers, login);
+                        this.Hide();
+                        task.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lo siento pero esta tarea ya existe, debes ponerle otro nombre", "Name Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        projectNameTxTBox.Text = "";
                     }
                 }
-                if (dontExists)
+                else
                 {
-                    Task task = new Task(projectWindow, tasksList, user, newTaskName, state, projectsUsers);
+                    Task task = new Task(projectWindow, tasksList, user, newTaskName, state, projectsUsers, login);
                     this.Hide();
                     task.ShowDialog();
                     this.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Lo siento pero esta tarea ya existe, debes ponerle otro nombre", "Name Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    projectNameTxTBox.Text = "";
-                }
-
             }
-            
             else
             {
                 MessageBox.Show("Introduce un Nombre valido","Name Error",MessageBoxButtons.OK,MessageBoxIcon.Error);

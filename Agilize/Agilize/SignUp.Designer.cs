@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUp));
             this.signUpGroup = new System.Windows.Forms.GroupBox();
+            this.agilizeLbl = new System.Windows.Forms.Label();
             this.surnamesTxtBox = new System.Windows.Forms.TextBox();
             this.nameTxtBox = new System.Windows.Forms.TextBox();
             this.PaswordTxtBox = new System.Windows.Forms.TextBox();
@@ -40,7 +41,6 @@
             this.mailTxtBox = new System.Windows.Forms.TextBox();
             this.signUpBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.agilizeLbl = new System.Windows.Forms.Label();
             this.signUpGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -64,6 +64,16 @@
             this.signUpGroup.Size = new System.Drawing.Size(643, 765);
             this.signUpGroup.TabIndex = 2;
             this.signUpGroup.TabStop = false;
+            // 
+            // agilizeLbl
+            // 
+            this.agilizeLbl.AutoSize = true;
+            this.agilizeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agilizeLbl.Location = new System.Drawing.Point(306, 732);
+            this.agilizeLbl.Name = "agilizeLbl";
+            this.agilizeLbl.Size = new System.Drawing.Size(55, 20);
+            this.agilizeLbl.TabIndex = 9;
+            this.agilizeLbl.Text = "Agilize";
             // 
             // surnamesTxtBox
             // 
@@ -187,25 +197,18 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // agilizeLbl
-            // 
-            this.agilizeLbl.AutoSize = true;
-            this.agilizeLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.agilizeLbl.Location = new System.Drawing.Point(306, 732);
-            this.agilizeLbl.Name = "agilizeLbl";
-            this.agilizeLbl.Size = new System.Drawing.Size(55, 20);
-            this.agilizeLbl.TabIndex = 9;
-            this.agilizeLbl.Text = "Agilize";
-            // 
             // SignUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(197)))), ((int)(((byte)(159)))));
             this.ClientSize = new System.Drawing.Size(1264, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.signUpGroup);
+            this.MaximizeBox = false;
             this.Name = "SignUp";
+            this.ShowIcon = false;
             this.Text = "SignUp";
             this.signUpGroup.ResumeLayout(false);
             this.signUpGroup.PerformLayout();

@@ -323,6 +323,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(1094, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.searchBTN);
             this.Controls.Add(this.folderPathTxtBox);
             this.Controls.Add(this.saveBTN);
@@ -330,7 +331,9 @@
             this.Controls.Add(this.fileListBox);
             this.Controls.Add(this.directorysListBox);
             this.Controls.Add(this.Menu);
+            this.MaximizeBox = false;
             this.Name = "ProjectFolders";
+            this.ShowIcon = false;
             this.Text = "ProjectFolders";
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();

@@ -81,8 +81,9 @@ namespace Agilize
                 {
                     if (IsUser())
                     {
-                        MainHub mainHub = new MainHub(user, pathToProjectFiles);
+                        MainHub mainHub = new MainHub(user, pathToProjectFiles,this);
                         mainHub.Show();
+                        this.Hide();
                     }
                     else
                     {

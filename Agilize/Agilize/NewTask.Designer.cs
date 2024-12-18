@@ -93,11 +93,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(584, 261);
+            this.ControlBox = false;
             this.Controls.Add(this.acceptBtn);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.projectNameTxTBox);
             this.Controls.Add(this.newTaskLbls);
             this.Name = "NewTask";
+            this.ShowIcon = false;
             this.Text = "NewTask";
             this.ResumeLayout(false);
             this.PerformLayout();
