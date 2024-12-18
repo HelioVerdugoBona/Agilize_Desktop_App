@@ -234,6 +234,11 @@ namespace Agilize
         private void sprintNumUpDown_ValueChanged(object sender, EventArgs e)
         {
             task.Sprint = (int) sprintNumUpDown.Value;
+            if (task.Sprint > 10)
+            {
+                task.Sprint = 10;
+                sprintNumUpDown.Value = 10;
+            }
         }
 
         /// <summary>
