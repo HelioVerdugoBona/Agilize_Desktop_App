@@ -3,16 +3,10 @@ using Org.BouncyCastle.Crypto.Paddings;
 using Org.BouncyCastle.Crypto.Parameters;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Agilize
 {
@@ -81,6 +75,7 @@ namespace Agilize
                 {
                     if (IsUser())
                     {
+                        paswordTxTBox.Text = "";
                         MainHub mainHub = new MainHub(user, pathToProjectFiles,this);
                         mainHub.Show();
                         this.Hide();

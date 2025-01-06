@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Agilize
@@ -18,7 +14,7 @@ namespace Agilize
         Users user;
         String pathToProjectFiles;
         MainHub mainHub;
-        ProjectFolders folderFolders;
+        ProjectFolders projectFolders;
         Acount acount;
         Login login;
         /// <summary>
@@ -37,13 +33,13 @@ namespace Agilize
             RedondearBoton(cancelBtn);
         }
 
-        public NewProject(Users user, String pathToProjectFiles, ProjectFolders folderFolders, Login login)
+        public NewProject(Users user, String pathToProjectFiles, ProjectFolders projectFolders, Login login)
         {
             InitializeComponent();
             projects = new Projects();
             this.user = new Users();
             this.user = user;
-            this.folderFolders = folderFolders;
+            this.projectFolders = projectFolders;
             this.pathToProjectFiles = pathToProjectFiles;
             this.login = login;
             RedondearBoton(acceptBtn);
@@ -132,7 +128,18 @@ namespace Agilize
                     {
                         user.projectsList.Add(projects.projectName);
                     }
-                    mainHub.Close();
+                    if (mainHub != null)
+                    {
+                        mainHub.Close();
+                    }
+                    else if (acount != null)
+                    {
+                        acount.Close();
+                    }
+                    else if (projectFolders != null)
+                    {
+                        projectFolders.Close();
+                    }
                     ProjectWindow project = new ProjectWindow(user, pathToProjectFiles, projects.projectName, true, login);
                     project.Show();
                     this.Close();

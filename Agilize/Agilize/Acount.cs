@@ -3,14 +3,10 @@ using Org.BouncyCastle.Crypto.Paddings;
 using Org.BouncyCastle.Crypto.Parameters;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Agilize
@@ -90,7 +86,6 @@ namespace Agilize
         {
             NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
             newProject.Show();
-            this.Close();
         }
 
         /// <summary>
@@ -100,7 +95,6 @@ namespace Agilize
         {
             NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
             newProject.Show();
-            this.Close();
         }
 
         /// <summary>

@@ -1,13 +1,7 @@
-﻿using Org.BouncyCastle.Asn1.X509;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Agilize
@@ -162,7 +156,6 @@ namespace Agilize
         {
             NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
             newProject.Show();
-            this.Close();
         }
 
         /// <summary>
@@ -172,7 +165,6 @@ namespace Agilize
         {
             NewProject newProject = new NewProject(user, pathToProjectFiles,this, login);
             newProject.Show();
-            this.Close();
         }
 
         /// <summary>
