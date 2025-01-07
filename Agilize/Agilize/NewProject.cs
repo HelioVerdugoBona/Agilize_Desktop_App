@@ -29,6 +29,7 @@ namespace Agilize
             this.user = user;
             this.mainHub = mainHub;
             this.pathToProjectFiles = pathToProjectFiles;
+            this.login = login;
             RedondearBoton(acceptBtn);
             RedondearBoton(cancelBtn);
         }

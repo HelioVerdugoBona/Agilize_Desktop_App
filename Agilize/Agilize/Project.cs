@@ -16,6 +16,7 @@ namespace Agilize
         String usersJson = "\\Users.json";
         Projects projects;
         Login login;
+
         /// <summary>
         /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión.
         /// </summary>
@@ -44,7 +45,30 @@ namespace Agilize
             this.pathToProjectFiles = pathToProjectFiles;
             SetAllLbls();
             SetAllLBoxs();
+            SetAllToolTips();
             RedondearBoton(saveBTN);
+        }
+
+        /// <summary>
+        /// Settea los tool tips del form para que se entienda que clickar en el lbl genera la tarea en ese estado
+        /// la logica de la función esta sacada directamente del ejemplo de la documentación online.
+        /// </summary>
+        private void SetAllToolTips()
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 500;
+            toolTip1.ReshowDelay = 500;
+
+            toolTip1.ShowAlways = true;
+
+            toolTip1.SetToolTip(backLogLBL, "Haz Click para crear una tarea en backlog");
+            toolTip1.SetToolTip(toDoLBL, "Haz Click para crear una tarea directamente en To Do");
+            toolTip1.SetToolTip(doingLBL, "Haz Click para crear una tarea directamente en Doing");
+            toolTip1.SetToolTip(pendingConfirmationLBL, "Haz Click para crear una tarea directamente en Pendin Confirmation");
+            toolTip1.SetToolTip(doneLBL, "Haz Click para crear una tarea directamente en Done");
+
         }
 
         /// <summary>
@@ -181,13 +205,11 @@ namespace Agilize
 
 
         /// <summary>
-        /// Abre la pestaña de Home
+        /// Abre la pestaña de Home 
         /// </summary>
         private void homeLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
-            mainHub.Show();
-            this.Close();
+            change_Window("MainHub");
         }
 
         /// <summary>
@@ -195,9 +217,7 @@ namespace Agilize
         /// </summary>
         private void homeIMG_Click(object sender, EventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
-            mainHub.Show();
-            this.Close();
+            change_Window("MainHub");
         }
 
         /// <summary>
@@ -205,8 +225,7 @@ namespace Agilize
         /// </summary>
         private void manageMembersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles,projects, login);
-            manageMembers.ShowDialog();
+            change_Window("ManageMembers");
         }
 
         /// <summary>
@@ -214,8 +233,7 @@ namespace Agilize
         /// </summary>
         private void manageMembersIMG_Click(object sender, EventArgs e)
         {
-            ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles, projects, login);
-            manageMembers.ShowDialog();
+            change_Window("ManageMembers");
         }
 
         /// <summary>
@@ -223,9 +241,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
-            projectFolders.Show();
-            this.Close();
+            change_Window("ProjectFolders");
         }
 
         /// <summary>
@@ -233,19 +249,15 @@ namespace Agilize
         /// </summary>
         private void projectFoldersIMG_Click(object sender, EventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
-            projectFolders.Show();
-            this.Close();
+            change_Window("ProjectFolders");
         }
 
         /// <summary>
-        /// Abre la pestaña de Acount
+        /// Abre la pestaña de Acount 
         /// </summary>
         private void acountLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles, login);
-            acount.Show();
-            this.Close();
+            change_Window("Acount");
         }
 
         /// <summary>
@@ -253,9 +265,7 @@ namespace Agilize
         /// </summary>
         private void acountIMG_Click(object sender, EventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles, login);
-            acount.Show();
-            this.Close();
+            change_Window("Acount");
         }
 
         /// <summary>
@@ -397,10 +407,45 @@ namespace Agilize
             }
         }
 
+        /// <summary>
+        /// Cierra sesión
+        /// </summary>
         private void logOutBtn_Click(object sender, EventArgs e)
         {
             login.Show();
             this.Close();
+        }
+
+        /// <summary>
+        /// Dependiendo de que String recibe cambia de ventana a una u otra.
+        /// </summary>
+        private void change_Window(String window_Destination)
+        {
+            switch (window_Destination)
+            {
+                case "MainHub":
+                    MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
+                    mainHub.Show();
+                    this.Close();
+                    break;
+
+                case "ManageMembers":
+                    ManageMembers manageMembers = new ManageMembers(user, pathToProjectFiles, projects, login);
+                    manageMembers.ShowDialog();
+                    break;
+
+                case "ProjectFolders":
+                    ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
+                    projectFolders.Show();
+                    this.Close();
+                    break;
+
+                case "Acount":
+                    Acount acount = new Acount(user, pathToProjectFiles, login);
+                    acount.Show();
+                    this.Close();
+                    break;
+            }
         }
     }
 }

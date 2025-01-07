@@ -129,30 +129,20 @@ namespace Agilize
         /// </summary>
         private void nameTxtBox_Enter(object sender, EventArgs e)
         {
-            if (nameTxtBox.Text == "Name")
-            {
-                nameTxtBox.Text = "";
-                nameTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Name", nameTxtBox);
         }
 
         /// <summary>
-        /// Guarda el nombre del nuevo usuario, sino deja el texto de Name para indicar que se ha de poner el nombre
+        /// Guarda el nuevo nombre del usuario, sino deja el texto de Name para indicar que se ha de poner el nombre
         /// funciona como un hint.
         /// </summary>
         private void nameTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTxtBox.Text))
-            {
-                nameTxtBox.Text = "Name";
-                nameTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Name", nameTxtBox))
             {
                 newUser.name = nameTxtBox.Text;
             }
         }
-
 
         /// <summary>
         /// Comprueba que el text box tenga como nombre Surnames, si es así lo borra para que el usuario pueda escribir.
@@ -160,30 +150,20 @@ namespace Agilize
         /// </summary>
         private void surnamesTxtBox_Enter(object sender, EventArgs e)
         {
-            if (surnamesTxtBox.Text == "Surnames")
-            {
-                surnamesTxtBox.Text = "";
-                surnamesTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Surnames", surnamesTxtBox);
         }
 
         /// <summary>
-        /// Guarda el apellido del nuevo usuario, sino deja el texto de Surnames para indicar que se ha de poner el apellido
+        /// Guarda el nuevo apellido del usuario, sino deja el texto de Surnames para indicar que se ha de poner el apellido
         /// funciona como un hint.
         /// </summary>
         private void surnamesTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(surnamesTxtBox.Text))
-            {
-                surnamesTxtBox.Text = "Surnames";
-                surnamesTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Surnames", surnamesTxtBox))
             {
                 newUser.surname = surnamesTxtBox.Text;
             }
         }
-
 
         /// <summary>
         /// Comprueba que el text box tenga como nombre Email, si es así lo borra para que el usuario pueda escribir.
@@ -191,30 +171,20 @@ namespace Agilize
         /// </summary>
         private void mailTxtBox_Enter(object sender, EventArgs e)
         {
-            if (mailTxtBox.Text == "Email")
-            {
-                mailTxtBox.Text = "";
-                mailTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Email", mailTxtBox);
         }
 
         /// <summary>
-        /// Guarda el mail del nuevo usuario, sino deja el texto de Email para indicar que se ha de poner el mail
+        /// Guarda el  nuevo mail del usuario, sino deja el texto de Email para indicar que se ha de poner el mail
         /// funciona como un hint.
         /// </summary>
         private void mailTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(mailTxtBox.Text))
-            {
-                mailTxtBox.Text = "Email";
-                mailTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Email", mailTxtBox))
             {
                 newUser.email = mailTxtBox.Text;
             }
         }
-
 
         /// <summary>
         /// Comprueba que el text box tenga como nombre Nickname, si es así lo borra para que el usuario pueda escribir.
@@ -222,11 +192,7 @@ namespace Agilize
         /// </summary>
         private void NicknameTxtBox_Enter(object sender, EventArgs e)
         {
-            if (NicknameTxtBox.Text == "Nickname")
-            {
-                NicknameTxtBox.Text = "";
-                NicknameTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Nickname", NicknameTxtBox);
         }
 
         /// <summary>
@@ -235,12 +201,7 @@ namespace Agilize
         /// </summary>
         private void NicknameTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NicknameTxtBox.Text))
-            {
-                NicknameTxtBox.Text = "Nickname";
-                NicknameTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Nickname", NicknameTxtBox))
             {
                 newUser.nickname = NicknameTxtBox.Text;
             }
@@ -253,25 +214,16 @@ namespace Agilize
         /// </summary>
         private void PaswordTxtBox_Enter(object sender, EventArgs e)
         {
-            if (PaswordTxtBox.Text == "Password")
-            {
-                PaswordTxtBox.Text = "";
-                PaswordTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Password", PaswordTxtBox);
         }
 
         /// <summary>
-        /// Guarda la contraseña del nuevo usuario, sino deja el texto de Password para indicar que se ha de poner la contraseña
+        /// Guarda la nueva contraseña usuario, sino deja el texto de Password para indicar que se ha de poner la contraseña
         /// funciona como un hint.
         /// </summary>
         private void PaswordTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(PaswordTxtBox.Text))
-            {
-                PaswordTxtBox.Text = "Password";
-                PaswordTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Password", PaswordTxtBox))
             {
                 newUser.password = PaswordTxtBox.Text;
             }
@@ -308,9 +260,35 @@ namespace Agilize
             return Convert.ToBase64String(outputBytes);
         }
 
-        private void SignUp_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Comprueba si el text box tiene en el contendio el texto que recibem si es así, lo quita para que el usuario 
+        /// pueda escribir
+        /// </summary>
+        private void comprove_Hint(string hint, TextBox textBox)
         {
+            if (textBox.Text == hint)
+            {
+                textBox.Text = "";
+                textBox.ForeColor = SystemColors.WindowText;
+            }
+        }
 
+        /// <summary>
+        /// Comprueba si el text box esta vacio, si es así lo rellena con un texto que actuara como hint para que el usuario
+        /// sepa que ha de poner en ese text box.
+        /// </summary>
+        private bool write_Hint(string hint, TextBox textBox)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = hint;
+                textBox.ForeColor = SystemColors.GrayText;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

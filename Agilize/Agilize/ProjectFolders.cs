@@ -15,6 +15,7 @@ namespace Agilize
         String newfolderPathTxtBox;
         Users user;
         Login login;
+
         /// <summary>
         /// Contructor del form, recibe el path donde estan los archivos del programa y el usuario que ha iniciado sessión.
         /// </summary>
@@ -130,32 +131,27 @@ namespace Agilize
         }
 
         /// <summary>
-        /// Abre la pestaña de Home
+        /// Abre la pestaña de Home (que es esta misma)
         /// </summary>
         private void homeLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
-            mainHub.Show();
-            this.Close();
+            change_Window("MainHub");
         }
 
         /// <summary>
-        /// Abre la pestaña de Home
+        /// Abre la pestaña de Home (que es esta misma)
         /// </summary>
         private void homeIMG_Click(object sender, EventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
-            mainHub.Show();
-            this.Close();
+            change_Window("MainHub");
         }
 
         /// <summary>
-        /// Abre la pestaña de New Project 
+        /// Abre la pestaña de New Project
         /// </summary>
         private void newProjectLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
-            newProject.Show();
+            change_Window("NewProject");
         }
 
         /// <summary>
@@ -163,8 +159,7 @@ namespace Agilize
         /// </summary>
         private void newProjectIMG_Click(object sender, EventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles,this, login);
-            newProject.Show();
+            change_Window("NewProject");
         }
 
         /// <summary>
@@ -172,9 +167,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
-            projectFolders.Show();
-            this.Close();
+            change_Window("ProjectFolders");
         }
 
         /// <summary>
@@ -182,29 +175,23 @@ namespace Agilize
         /// </summary>
         private void projectFoldersIMG_Click(object sender, EventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
-            projectFolders.Show();
-            this.Close();
+            change_Window("ProjectFolders");
         }
 
         /// <summary>
-        /// Abre la pestaña de Acount
+        /// Abre la pestaña de Acount 
         /// </summary>
         private void acountLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles, login);
-            acount.Show();
-            this.Close();
+            change_Window("Acount");
         }
 
         /// <summary>
-        /// Abre la pestaña de Acount
+        /// Abre la pestaña de Acount 
         /// </summary>
         private void acountIMG_Click(object sender, EventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles, login);
-            acount.Show();
-            this.Close();
+            change_Window("Acount");
         }
 
         /// <summary>
@@ -215,10 +202,45 @@ namespace Agilize
             pathToProjectFiles = newfolderPathTxtBox;
         }
 
+        /// <summary>
+        /// Cierra sesión
+        /// </summary>
         private void logOutBtn_Click(object sender, EventArgs e)
         {
             login.Show();
             this.Close();
+        }
+
+        /// <summary>
+        /// Dependiendo de que String recibe cambia de ventana a una u otra.
+        /// </summary>
+        private void change_Window(String window_Destination)
+        {
+            switch (window_Destination)
+            {
+                case "MainHub":
+                    MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
+                    mainHub.Show();
+                    this.Close();
+                    break;
+
+                case "NewProject":
+                    NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
+                    newProject.Show();
+                    break;
+
+                case "ProjectFolders":
+                    ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
+                    projectFolders.Show();
+                    this.Close();
+                    break;
+
+                case "Acount":
+                    Acount acount = new Acount(user, pathToProjectFiles, login);
+                    acount.Show();
+                    this.Close();
+                    break;
+            }
         }
     }
 }

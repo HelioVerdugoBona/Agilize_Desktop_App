@@ -64,9 +64,7 @@ namespace Agilize
         /// </summary>
         private void homeLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
-            mainHub.Show();
-            this.Close();
+            change_Window("MainHub");
         }
 
         /// <summary>
@@ -74,9 +72,7 @@ namespace Agilize
         /// </summary>
         private void homeIMG_Click(object sender, EventArgs e)
         {
-            MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
-            mainHub.Show();
-            this.Close();
+            change_Window("MainHub");
         }
 
         /// <summary>
@@ -84,8 +80,7 @@ namespace Agilize
         /// </summary>
         private void newProjectLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
-            newProject.Show();
+            change_Window("NewProject");
         }
 
         /// <summary>
@@ -93,8 +88,7 @@ namespace Agilize
         /// </summary>
         private void newProjectIMG_Click(object sender, EventArgs e)
         {
-            NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
-            newProject.Show();
+            change_Window("NewProject");
         }
 
         /// <summary>
@@ -102,9 +96,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
-            projectFolders.Show();
-            this.Close();
+            change_Window("ProjectFolders");
         }
 
         /// <summary>
@@ -112,9 +104,7 @@ namespace Agilize
         /// </summary>
         private void projectFoldersIMG_Click(object sender, EventArgs e)
         {
-            ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
-            projectFolders.Show();
-            this.Close();
+            change_Window("ProjectFolders");
         }
 
         /// <summary>
@@ -122,9 +112,7 @@ namespace Agilize
         /// </summary>
         private void acountLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles, login);
-            acount.Show();
-            this.Close();
+            change_Window("Acount");
         }
 
         /// <summary>
@@ -132,9 +120,7 @@ namespace Agilize
         /// </summary>
         private void acountIMG_Click(object sender, EventArgs e)
         {
-            Acount acount = new Acount(user, pathToProjectFiles, login);
-            acount.Show();
-            this.Close();
+            change_Window("Acount");
         }
 
         /// <summary>
@@ -143,11 +129,7 @@ namespace Agilize
         /// </summary>
         private void nameTxtBox_Enter(object sender, EventArgs e)
         {
-            if (nameTxtBox.Text == "Name")
-            {
-                nameTxtBox.Text = "";
-                nameTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Name", nameTxtBox);
         }
 
         /// <summary>
@@ -156,12 +138,7 @@ namespace Agilize
         /// </summary>
         private void nameTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTxtBox.Text))
-            {
-                nameTxtBox.Text = "Name";
-                nameTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Name", nameTxtBox))
             {
                 user.name = nameTxtBox.Text;
             }
@@ -174,11 +151,7 @@ namespace Agilize
         /// </summary>
         private void surnamesTxtBox_Enter(object sender, EventArgs e)
         {
-            if (surnamesTxtBox.Text == "Surnames")
-            {
-                surnamesTxtBox.Text = "";
-                surnamesTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Surnames", surnamesTxtBox);
         }
 
         /// <summary>
@@ -187,12 +160,7 @@ namespace Agilize
         /// </summary>
         private void surnamesTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(surnamesTxtBox.Text))
-            {
-                surnamesTxtBox.Text = "Surnames";
-                surnamesTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Surnames", surnamesTxtBox))
             {
                 user.surname = surnamesTxtBox.Text;
             }
@@ -205,11 +173,7 @@ namespace Agilize
         /// </summary>
         private void mailTxtBox_Enter(object sender, EventArgs e)
         {
-            if (mailTxtBox.Text == "Email")
-            {
-                mailTxtBox.Text = "";
-                mailTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Email", mailTxtBox);
         }
 
         /// <summary>
@@ -218,12 +182,7 @@ namespace Agilize
         /// </summary>
         private void mailTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(mailTxtBox.Text))
-            {
-                mailTxtBox.Text = "Email";
-                mailTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Email", mailTxtBox))
             {
                 user.email = mailTxtBox.Text;
             }
@@ -235,11 +194,7 @@ namespace Agilize
         /// </summary>
         private void PaswordTxtBox_Enter(object sender, EventArgs e)
         {
-            if (PaswordTxtBox.Text == "Password")
-            {
-                PaswordTxtBox.Text = "";
-                PaswordTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Password", PaswordTxtBox);
         }
 
         /// <summary>
@@ -248,12 +203,7 @@ namespace Agilize
         /// </summary>
         private void PaswordTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(PaswordTxtBox.Text))
-            {
-                PaswordTxtBox.Text = "Password";
-                PaswordTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Password", PaswordTxtBox))
             {
                 newPswrd = PaswordTxtBox.Text;
             }
@@ -265,12 +215,10 @@ namespace Agilize
         /// </summary>
         private void confirmPswrdTxtBox_Enter(object sender, EventArgs e)
         {
-            if (confirmPswrdTxtBox.Text == "Password")
-            {
-                confirmPswrdTxtBox.Text = "";
-                confirmPswrdTxtBox.ForeColor = SystemColors.WindowText;
-            }
+            comprove_Hint("Password", confirmPswrdTxtBox);
         }
+
+ 
 
         /// <summary>
         /// Guarda la nueva contraseña de usuario, sino deja el texto de Password para indicar que se ha de poner la contraseña
@@ -279,12 +227,7 @@ namespace Agilize
         /// </summary>
         private void confirmPswrdTxtBox_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(confirmPswrdTxtBox.Text))
-            {
-                confirmPswrdTxtBox.Text = "Password";
-                confirmPswrdTxtBox.ForeColor = SystemColors.GrayText;
-            }
-            else
+            if (write_Hint("Password", confirmPswrdTxtBox))
             {
                 String newPswrdConfirmation = confirmPswrdTxtBox.Text;
 
@@ -294,11 +237,10 @@ namespace Agilize
                 }
                 else
                 {
-                    MessageBox.Show("Las contraseñas no coinciden","Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Las contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     confirmPswrdTxtBox.Text = "Password";
                     PaswordTxtBox.Text = "Password";
                 }
-
             }
         }
 
@@ -417,10 +359,76 @@ namespace Agilize
                    !string.IsNullOrWhiteSpace(user.password);
         }
 
+        /// <summary>
+        /// Cierra sesión
+        /// </summary>
         private void logOutBtn_Click(object sender, EventArgs e)
         {
             login.Show();
             this.Close();
+        }
+
+        /// <summary>
+        /// Dependiendo de que String recibe cambia de ventana a una u otra.
+        /// </summary>
+        private void change_Window(String window_Destination)
+        {
+            switch (window_Destination) 
+            {
+                case "MainHub":
+                    MainHub mainHub = new MainHub(user, pathToProjectFiles, login);
+                    mainHub.Show();
+                    this.Close();
+                    break;
+
+                case "NewProject":
+                    NewProject newProject = new NewProject(user, pathToProjectFiles, this, login);
+                    newProject.Show();
+                    break;
+
+                case "ProjectFolders":
+                    ProjectFolders projectFolders = new ProjectFolders(user, pathToProjectFiles, login);
+                    projectFolders.Show();
+                    this.Close();
+                    break;
+
+                case "Acount":
+                    Acount acount = new Acount(user, pathToProjectFiles, login);
+                    acount.Show();
+                    this.Close();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Comprueba si el text box tiene en el contendio el texto que recibem si es así, lo quita para que el usuario 
+        /// pueda escribir
+        /// </summary>
+        private void comprove_Hint(string hint, TextBox textBox)
+        {
+            if (textBox.Text == hint)
+            {
+                textBox.Text = "";
+                textBox.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        /// <summary>
+        /// Comprueba si el text box esta vacio, si es así lo rellena con un texto que actuara como hint para que el usuario
+        /// sepa que ha de poner en ese text box.
+        /// </summary>
+        private bool write_Hint(string hint, TextBox textBox)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = hint;
+                textBox.ForeColor = SystemColors.GrayText;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
